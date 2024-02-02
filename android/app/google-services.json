@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "298523946122",
+    "firebase_url": "https://pizzapp-9d345-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "pizzapp-9d345",
+    "storage_bucket": "pizzapp-9d345.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298523946122:android:77ea03e9b4cc7311b55173",
+        "android_client_info": {
+          "package_name": "com.example.pizzapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVjgCaviSoUDV22fTbAs3y4RKh7umw7Sg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
