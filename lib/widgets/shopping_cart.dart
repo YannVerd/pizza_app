@@ -105,10 +105,12 @@ late double total = 0;
           Order newOrder = Order({'email': 'fake@email.fr', 'tel': '0876283232'}, Provider.of<ShoppingCartProvider>(context, listen: false).shoppingCart!, total);
           Map finalOrder = newOrder.createMap();
           db.addOrder(finalOrder);
+          Provider.of<ShoppingCartProvider>(context, listen: false).deleteAll();
          } else {
           Order newOrder = Order({'email': email, 'tel': '0876283232'}, Provider.of<ShoppingCartProvider>(context, listen: false).shoppingCart!, total);
           Map finalOrder = newOrder.createMap();
           db.addOrder(finalOrder);
+          Provider.of<ShoppingCartProvider>(context, listen: false).deleteAll();
          }
           
         }),

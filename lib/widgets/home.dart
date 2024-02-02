@@ -37,11 +37,8 @@ class _HomeState extends State<Home> {
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
-                          width: MediaQuery.of(context).size.width,
+                          width: MediaQuery.of(context).size.width*0.75,
                           margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                          // decoration: BoxDecoration(
-                          //   color: Theme.of(context).primaryColor
-                          // ),
                           child: PizzaCard(pizza, false),
                         );
                       },

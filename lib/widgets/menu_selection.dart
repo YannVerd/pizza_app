@@ -34,68 +34,77 @@ class _MenuSelectionState extends State<MenuSelection> {
   @override
   Widget build(BuildContext context){
     
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const SizedBox(height: 10),
-        MyDropdownMenu(const ['rouge', 'blanche']),
-        const SizedBox(height: 10),
-        FutureBuilder<DatabaseEvent>(
-        future:  FirebaseDatabase.instance.ref('/pizzas').once(), 
-        builder: (BuildContext context, AsyncSnapshot<DatabaseEvent> snapshot) {
-          List<Widget> children;
-          if(snapshot.hasData) {
-            List<dynamic> datas = snapshot.data!.snapshot.value as List;  // necessary chained method for retrieve de value
-            return
-              Expanded(
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-
-                  shrinkWrap: true, // for override the parrent's size ?
-                  itemCount: datas.length,
-                  itemBuilder: (context, index){
-                    if(datas[index]['types'].contains(Provider.of<BaseCompositionProvider>(context,listen: false).base)){
-                      return PizzaCard(datas[index], true);
-                    } else {
-                      return null;
-                    }              
-                  },
+    return Center(
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.5,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                MyDropdownMenu(const ['rouge', 'blanche']),
+              ],
+            ),
+            const SizedBox(height: 10),
+            FutureBuilder<DatabaseEvent>(
+            future:  FirebaseDatabase.instance.ref('/pizzas').once(), 
+            builder: (BuildContext context, AsyncSnapshot<DatabaseEvent> snapshot) {
+              List<Widget> children;
+              if(snapshot.hasData) {
+                List<dynamic> datas = snapshot.data!.snapshot.value as List;  // necessary chained method for retrieve de value
+                return
+                  Expanded(
+                    child: ListView.builder(
+                    
+                      scrollDirection: Axis.vertical,
+                      itemCount: datas.length,
+                      itemBuilder: (context, index){
+                        if(datas[index]['types'].contains(Provider.of<BaseCompositionProvider>(context,listen: false).base)){
+                          return PizzaCard(datas[index], true);
+                        } else {
+                          return null;
+                        }              
+                      },
+                    ),
+                  );
+              } else if (snapshot.hasError) {
+                children = <Widget>[
+                  const Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                    size: 60,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: Text('Error: ${snapshot.error}'),
+                  ),
+                ];
+              } else {
+                children = const <Widget>[
+                  SizedBox(
+                    width: 60,
+                    height: 60,
+                    child: CircularProgressIndicator(),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 16),
+                    child: Text('Awaiting result...'),
+                  ),
+                ];
+              }
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: children,
                 ),
               );
-          } else if (snapshot.hasError) {
-            children = <Widget>[
-              const Icon(
-                Icons.error_outline,
-                color: Colors.red,
-                size: 60,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 6),
-                child: Text('Error: ${snapshot.error}'),
-              ),
-            ];
-          } else {
-            children = const <Widget>[
-              SizedBox(
-                width: 60,
-                height: 60,
-                child: CircularProgressIndicator(),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 16),
-                child: Text('Awaiting result...'),
-              ),
-            ];
-          }
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: children,
-            ),
-          );
-        },
-                )
-      ]
+            },
+                    )
+          ]
+        ),
+      ),
     );
   }
 }

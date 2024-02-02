@@ -22,4 +22,8 @@ class ShoppingCartProvider extends ChangeNotifier{
     _shoppingCart.removeAt(index);
     notifyListeners();
   }
+  void deleteAll(){
+    _shoppingCart = [];
+    notifyListeners();
+  }
 }

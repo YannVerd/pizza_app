@@ -25,7 +25,7 @@ class _PizzaCardState extends State<PizzaCard> {
   Widget build(BuildContext context) {
 
     return GestureDetector(
-      onTap : (){
+      onTap : (){ // Display list of details if clicked
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -75,6 +75,7 @@ class _PizzaCardState extends State<PizzaCard> {
         );
       },
       child: Container(
+        constraints: const BoxConstraints(maxWidth: 350),
         height: 210,
         margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -109,7 +110,7 @@ class _PizzaCardState extends State<PizzaCard> {
                       color: Colors.white,
                       shape: const CircleBorder(),
                       onPressed: () {}, 
-                      child: const Icon(Icons.favorite)
+                      child: Icon(Icons.favorite, color: dGreen,)
                     ),
                   ),
                 ],

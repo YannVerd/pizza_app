@@ -28,8 +28,8 @@ class FireStoreService {
   }
 
   Future<void> getOrdersByEmail(email) async {
-    var result = await _ref.child("/orders").orderByKey().orderByChild('email').equalTo(email).get();
+    var data= await _ref.child("/orders").orderByChild('email').equalTo(email).once();
 
-    print(result);
+    print("query: ${data.snapshot.value}");
   }
 }

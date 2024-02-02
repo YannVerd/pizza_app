@@ -1,17 +1,17 @@
 
 
 class Order{
-   Object infosCustomer;
+   Object infoCustomers;
 
     List<dynamic> pizzas;
     double prix;
 
 
-  Order(this.infosCustomer, this.pizzas, this.prix);
+  Order(this.infoCustomers, this.pizzas, this.prix);
 
   Map<String,dynamic> createMap(){
     return {
-      'infoCustomers': infosCustomer,
+      'infosCustomer': infoCustomers,
       'pizzas': pizzas,
       'prix': prix,
     };
