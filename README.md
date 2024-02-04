@@ -2,7 +2,6 @@
 
 profils d'essais : 
     - mika@email.fr ; mdp : 123456
-    - yann.e.verdier@gmail.com ; mdp : 123456
 
 ## Difficultés rencontrées:
 
