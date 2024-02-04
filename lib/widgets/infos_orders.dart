@@ -12,12 +12,15 @@ class InfosOrders extends StatefulWidget {
 
 class _InfosOrdersState extends State<InfosOrders> {
 
-  var list = [];
+  // ignore: prefer_typing_uninitialized_variables
+  late final  Future<List<dynamic>>? list;
+  // List test = [{"id":"kduhfdzof", "pizzas": 3, "prix": 50.00}, {"id":"kduhfdzof", "pizzas": 3, "prix": 50.00}, {"id":"kduhfdzof", "pizzas": 3, "prix": 50.00}]; // work with this list without Future(and adapt the dataTable)
+ 
   var db = FireStoreService();
 
   @override
   void initState(){
-    db.getOrdersByEmail(FirebaseAuth.instance.currentUser?.email);
+    list = db.getOrdersByEmail(FirebaseAuth.instance.currentUser?.email) as Future<List<dynamic>>?;
     // print(list);
 
   super.initState();  
@@ -25,59 +28,65 @@ class _InfosOrdersState extends State<InfosOrders> {
   }
 
   
-    
+    // testing Table
   @override
   Widget build(BuildContext context) {
-    return DataTable(
-      columns: const <DataColumn>[
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'Numéro Commande',
-              style: TextStyle(fontStyle: FontStyle.italic),
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'Prix',
-              style: TextStyle(fontStyle: FontStyle.italic),
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'Pizzas',
-              style: TextStyle(fontStyle: FontStyle.italic),
-            ),
-          ),
-        ),
-      ],
-      rows: const <DataRow>[
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Sarah')),
-            DataCell(Text('19')),
-            DataCell(Text('Student')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Janine')),
-            DataCell(Text('43')),
-            DataCell(Text('Professor')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('William')),
-            DataCell(Text('27')),
-            DataCell(Text('Associate Professor')),
-          ],
-        ),
-      ],
+    return FutureBuilder<List<dynamic>>(
+        future: list, // your future data
+        builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+          if (snapshot.hasData) {
+            return Center(
+              child: DataTable(
+                columns: const <DataColumn>[
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Numéro Commande',
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      ),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Prix',
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      ),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Pizzas',
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      ),
+                    ),
+                  ),
+                ],
+                rows: snapshot.data!.map((order) =>  DataRow(
+                  
+                          cells:  [
+                            DataCell(Text(order)),
+                            DataCell(Text(order["pizzas"].length.toString())),
+                            DataCell(Text(order["prix"].toString())),
+                            
+                          ],
+                          
+                        ))
+                    .toList(),
+              ),
+            );
+            
+        
+          } else if (snapshot.hasError) {
+            return const Text('Loading Error'); // error state
+          } else {
+
+          return const CircularProgressIndicator(); // loading state
+        }
+
+        },
     );
   }
 }
+
