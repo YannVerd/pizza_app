@@ -20,7 +20,7 @@ class _InfosOrdersState extends State<InfosOrders> {
 
   @override
   void initState(){
-    list = db.getOrdersByEmail(FirebaseAuth.instance.currentUser?.email) as Future<List<dynamic>>?;
+    // list = db.getOrdersByEmail(FirebaseAuth.instance.currentUser?.email) as Future<List<dynamic>>?;
     // print(list);
 
   super.initState();  
@@ -32,9 +32,12 @@ class _InfosOrdersState extends State<InfosOrders> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<dynamic>>(
-        future: list, // your future data
+        future: db.getOrdersByEmail(FirebaseAuth.instance.currentUser?.email),
         builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasData) {
+            snapshot.data!.map((order) {
+              print("order : $order");
+            }).toList();
             return Center(
               child: DataTable(
                 columns: const <DataColumn>[
@@ -63,29 +66,25 @@ class _InfosOrdersState extends State<InfosOrders> {
                     ),
                   ),
                 ],
-                rows: snapshot.data!.map((order) =>  DataRow(
-                  
+                rows: snapshot.data!.map((order) =>  DataRow(             
                           cells:  [
-                            DataCell(Text(order)),
-                            DataCell(Text(order["pizzas"].length.toString())),
-                            DataCell(Text(order["prix"].toString())),
-                            
+                            DataCell(Text(order['id'])),
+                             DataCell(Text(order['order']['prix'].toString())),
+                            DataCell(Text(order['order']['pizzas'].length.toString())),                                           
                           ],
                           
                         ))
                     .toList(),
               ),
             );
-            
-        
+                   
           } else if (snapshot.hasError) {
             return const Text('Loading Error'); // error state
           } else {
 
           return const CircularProgressIndicator(); // loading state
         }
-
-        },
+      },
     );
   }
 }

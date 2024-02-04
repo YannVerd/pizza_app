@@ -28,7 +28,7 @@ class FireStoreService {
     await _ref.child('/orders').push().set(order);
   }
 
-  Future<List?> getOrdersByEmail(email) async {
+  Future<List>? getOrdersByEmail(email) async {
     List idsOrders = []; // list of id's order
     List ordersCurrentUser = []; // list of current users order
 
@@ -56,7 +56,7 @@ class FireStoreService {
   // browse both list for add matchiong order
     listOrders.forEach((id, order){
       for(int i = 0; i < idsOrders.length; i++){
-        idsOrders[i] == id ? ordersCurrentUser.add(order) : false;
+        idsOrders[i] == id ? ordersCurrentUser.add({"order":order, "id":idsOrders[i]}) : false;
       }
     });
       

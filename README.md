@@ -48,11 +48,12 @@ profils d'essais :
 
 * Dans l'user_page:
     - les boutons change de couleurs tout seuls quand je rajoute l'onglet gps. Solution provisoire, changer les couleurs à la main. //// RESOLU (suppresion d'une option récurrente)
+    
     - le GPS ne marche pas du tout (google map module) /// UPDATE 02/02/24 14h30: j'ai changé pour map_launcher mais probleme de plugin
 
 ## Reste à faire (outre les problèmes ci-dessus à régler):
 
-* La partie Historique de l'user. //// UPDATE 02/02/2024 17h36 : Après 2h de recherche => Probleme pour la methode getAllByEmail de mon module Firestore = resultat null....Recherche en cours .... //// UPDATE 04/02/2024 20h26 : probleme de requete résolue avec une solution "en locale"  mais affichage compliqué avec le FutureBuilder => problème de typage.
+* La partie Historique de l'user. //// UPDATE 02/02/2024 17h36 : Après 2h de recherche => Probleme pour la methode getAllByEmail de mon module Firestore = resultat null....Recherche en cours .... //// UPDATE 04/02/2024 20h26 : probleme de requete résolue avec une solution "en locale"  mais affichage compliqué avec le FutureBuilder => problème de typage. //// UPDATE 04/02/24 22H52 : RESOLU !
     
 * Au paiement, proposer un formulaire pour rentrer l'email et le téléphone, ou de se connecter
 
