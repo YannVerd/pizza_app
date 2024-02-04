@@ -24,7 +24,7 @@ profils d'essais :
             J'y ai passé beaucoup de temps mais j'ai fini par trouver: l'utilisation du mot clef  "as" pour forcer le typage d'une donné à l'initialisation.
 
     *  Le typage et la gestion du null :
-        - L'utilisation des Futures widgets rend le typage plus complexes. J'ai perdu beaucoup de temps la dessus... (update du 04/02/24 : Et j'en perd encore !!!)
+        - L'utilisation des Futures widgets rend le typage plus complexes. J'ai perdu beaucoup de temps la dessus... (update du 04/02/24 : Et j'en perd encore !)
         - La gestion du null est une notion complexe en flutter. J'ai réussi a comprendre ce probleme en utilisant "?" et "!" pour spécifié si une propriété peut être null et prendre l'opposé du null. il existe aussi "??" pour indiquer une autre valeur prédéfinie si null.
 
 ## Problèmes encore d'actualité à l'heure d'écriture de ces lignes (vendredi 02 Février 2024 9:32):
@@ -37,6 +37,9 @@ profils d'essais :
 * Dans le home: 
     - Problème sur les cards du carousel : Un titre est trop long et overflow l'espace a droite. //// RESOLU : diminution taille du titre (un wrap serait plus adapté mais fonnctionne pas)
 
+* Card en général: 
+    - Elles ne sont pas responsives.
+
 * Dans le menu de selection:
     - dropdownbouton trop gros
     - la selection marche en partie. TOus les éléments ne sont pas display et certains disparaissent après un ou deux changements de selection
@@ -48,8 +51,9 @@ profils d'essais :
 
 * Dans l'user_page:
     - les boutons change de couleurs tout seuls quand je rajoute l'onglet gps. Solution provisoire, changer les couleurs à la main. //// RESOLU (suppresion d'une option récurrente)
-    
+
     - le GPS ne marche pas du tout (google map module) /// UPDATE 02/02/24 14h30: j'ai changé pour map_launcher mais probleme de plugin
+        /// UPDATE 04/02/24 23:10: map_launcher cherche a lancer une appli pré-installé sur ele device utilisé. Je ne l'ai pas fait donc ça ne peut pas marcher.
 
 ## Reste à faire (outre les problèmes ci-dessus à régler):
 
@@ -61,4 +65,4 @@ profils d'essais :
 
 ## Description
 
-....A venir si elle est finie un jour XD
+....A venir si l'application est finie un jour XD

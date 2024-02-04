@@ -47,6 +47,7 @@ dependencies:
   map_launcher: ^3.1.0
   flutter_svg:
   url_launcher: ^6.2.4
+ 
 
 dev_dependencies:
   flutter_test:
